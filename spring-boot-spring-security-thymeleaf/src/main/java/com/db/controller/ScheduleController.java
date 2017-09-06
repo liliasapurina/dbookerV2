@@ -55,4 +55,14 @@ public class ScheduleController {
         scheduleDao.save(newScheduleItems);
         return newScheduleItems;
     }
+
+    @DeleteMapping
+    public void deleteSchedule(@RequestBody BookSeat bookSeat) {
+        List<Schedule> allScheduleList = scheduleDao.findAll();
+        for (Schedule schedule : allScheduleList) {
+            if(schedule.getDate().equals(bookSeat.getDate()) && schedule.getSeatId() == bookSeat.getSeatId()){
+                scheduleDao.delete(schedule.getId()); // TODO: как удалить?
+            }
+        }
+    }
 }
