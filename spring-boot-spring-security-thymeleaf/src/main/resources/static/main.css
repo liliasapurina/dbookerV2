@@ -1,0 +1,9 @@
+#calendar {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.fc-event {
+    font-size: larger;
+    align-items: center;
+}
