@@ -31,8 +31,8 @@ function addItem(item) {
 }
 
 function showPopupForSeatsChoosing(start, end) {
-    var content = $('#modalContent');
-    content.empty();
+    var modalContent = $('#modalContent');
+    modalContent.empty();
     $.get(
         "/seat/available",
         {
@@ -41,9 +41,18 @@ function showPopupForSeatsChoosing(start, end) {
         },
         function (data) {
             data.forEach(function (item) {
-                content.append("<h2>" + item.date + "</h2>");
+                modalContent.append("<div id=\"seatsAt" + item.date + "\"></div>");
+                var content = $("#seatsAt" + item.date);
+                content.append("<div class=\"dateHeader\"><h2>" + item.date + "</h2></div>");
                 item.seats.forEach(function (seat) {
-                    content.append(seat.name + " ");
+                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"availableSeat\">Office seat: " + seat.name + "</div>");
+                    $("#" + seat.name + "At" + item.date).click(function () {
+                        bookSeat(item.date, seat.id);
+                        $("div").remove("#seatsAt" + item.date);
+                        if(modalContent.html() === "") {
+                            closeSeatsChoosingPopup();
+                        }
+                    })
                 });
             });
         }
@@ -51,7 +60,30 @@ function showPopupForSeatsChoosing(start, end) {
     location.href = "#chooseSeats";
 }
 
+function closeSeatsChoosingPopup() {
+    location.href = "#current";
+    var view = $('#calendar').fullCalendar('getView');
+    var start = view.start.format();
+    var end = view.end.format();
+    fillSchedule(start, end);
+}
+
+function bookSeat(date, seatId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/schedule/between', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(
+        [
+            {
+                date: date,
+                seatId: seatId
+            }
+        ]
+    ));
+}
+
 $(document).ready(function() {
+    location.href = "#current";
     $('#calendar').fullCalendar({
         selectable: true,
         firstDay: 1,
