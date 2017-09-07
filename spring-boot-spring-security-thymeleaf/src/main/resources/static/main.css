@@ -91,3 +91,10 @@
 #chooseSeatsHeader {
     text-align: center;
 }
+
+#logout{
+    text-align: right;
+    margin-right: 25px;
+    display:inline;
+    margin-left: 60%;
+}
