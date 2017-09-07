@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+button.fc-today-button.btn.btn-default.disabled{
+    cursor: default;
+}
+
 .modalDialog {
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
@@ -30,9 +34,9 @@
 }
 
 .modalDialog > div {
-    width: 50%;
+    width: 69%;
     position: relative;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #fff;
@@ -60,8 +64,12 @@
     box-shadow: 1px 1px 3px #000;
 }
 
-.availableSeat {
-    background: Green;
+#modalContent {
+    overflow: scroll;
+    max-height: 600px;
+}
+
+.seatChoosing {
     color: White;
     display: inline-block;
     font-size: larger;
@@ -70,22 +78,30 @@
     border-radius: 4px;
     padding-left: 5px;
     padding-right: 5px;
-    vertical-align: 7px;
     margin-right: 5px;
 }
 
-.availableSeat:hover {
+.seatChoosing:hover {
     cursor: pointer;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: grayscale(69%);
+    filter: grayscale(69%);
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
 }
 
-.dateHeader {
+.availableSeat {
+    background: Green;
+}
+
+.deleteSeat {
+    background: Red;
+}
+
+.seatsHeader {
     display: inline-block;
     margin-right: 50px;
+    margin-left: 69px;
 }
 
 #chooseSeatsHeader {
