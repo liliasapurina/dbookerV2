@@ -3,7 +3,8 @@
 <head>
     <title>DBooker: Admin</title>
     <div th:replace="fragments/header :: header-css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css"/>
+    <link rel='stylesheet' href='../../adminStyle.css'/>
     <script src='../../lib/jquery.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../superAdmin.js"></script>
@@ -13,16 +14,15 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<select id="cities" class="selectpicker" title="Choose one of the following..."></select>
-<select id="rooms" class="selectpicker" title="Choose one of the following..."></select>
-
-<div class="container">
-    <h2>Seats available status</h2>
+<div class="container centeredContainer">
+    <h1>Seats availability</h1>
+    <select id="cities" class="form-control selectpicker" title="Choose one of the following..."></select>
+    <select id="rooms" class="form-control selectpicker" title="Choose one of the following..."></select>
     <table class="table">
         <thead>
         <tr>
-            <th>Seat</th>
-            <th>Available</th>
+            <th class="centeredContainer"><h4>Seat</h4></th>
+            <th class="centeredContainer"><h4>Available</h4></th>
         </tr>
         </thead>
         <tbody id="availableTable">
