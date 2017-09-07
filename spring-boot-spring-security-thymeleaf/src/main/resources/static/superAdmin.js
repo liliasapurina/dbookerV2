@@ -4,6 +4,7 @@ var rooms = {};
 function showListOfCities() {
     var content = $('#cities');
     content.empty();
+    content.append("<option data-hidden=\"true\">Choose City</option>");
     $.get(
         "/city",
         function (data) {
@@ -18,6 +19,7 @@ function showListOfCities() {
 function showListOfRooms(cityName) {
     var content = $('#rooms');
     content.empty();
+    content.append("<option data-hidden=\"true\">Choose Room</option>");
     $.get(
         "/room/cityId=" + cities[cityName],
         function (data) {
@@ -29,6 +31,10 @@ function showListOfRooms(cityName) {
     );
 }
 
+function clearTable() {
+    $('#availableTable').empty();
+}
+
 function showListOfSeats(roomName) {
     var content = $('#availableTable');
     content.empty();
@@ -36,22 +42,31 @@ function showListOfSeats(roomName) {
         "/seat/roomId=" + rooms[roomName],
         function (data) {
             data.forEach(function (item) {
-                content.append("<tr class=\"success\"><td>" + item.name +"</td>"
-                    +" <td><div class=\"checkbox\"><input type=\"checkbox\" value=\"\"/></div></td></tr>");
+                content.append("<tr class=\"success\"><td>" + item.name + "</td>"
+                    + " <td><div class=\"checkbox\"><input type=\"checkbox\" value=\"\"/></div></td></tr>");
             });
         }
     );
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     showListOfCities();
 
-    $("#cities").on('change', function(){
-        var selected = $(this).find("option:selected").val();
-        showListOfRooms(selected);
+    $("#cities").on('change', function () {
+        var selectedCity = $(this).find("option:selected").val();
+        if(cities[selectedCity]){
+            showListOfRooms(selectedCity);
+        } else {
+            clearTable();
+        }
     });
-    $("#rooms").on('change', function(){
-        var selected = $(this).find("option:selected").val();
-        showListOfSeats(selected);
+
+    $("#rooms").on('change', function () {
+        var selectedRoom = $(this).find("option:selected").val();
+        if(rooms[selectedRoom]){
+            showListOfSeats(selectedRoom);
+        } else {
+            clearTable();
+        }
     });
 });
