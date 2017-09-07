@@ -50,7 +50,7 @@ function showPopupForSeatsChoosing(start, end) {
 
                 if (curSchedule[item.date] != undefined) {
                     content.append("<div class=\"seatsHeader\"><h4>Current seat</h4></div>");
-                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete Booking for: " + curSchedule[item.date] + "</div>");
+                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete Booking For: " + curSchedule[item.date] + "</div>");
                     $("#delete" + item.date).click(function () {
                         deleteBooking(item.date);
                         $("div").remove("#seatsAt" + item.date);
@@ -111,6 +111,10 @@ $(document).ready(function() {
     location.href = "#current";
     $('#calendar').fullCalendar({
         selectable: true,
+        selectConstraint: {
+            start: $.fullCalendar.moment().subtract(1, 'days'),
+            end: $.fullCalendar.moment().add(69, 'years')
+        },
         firstDay: 1,
         aspectRatio: 2,
         themeSystem: 'bootstrap3',

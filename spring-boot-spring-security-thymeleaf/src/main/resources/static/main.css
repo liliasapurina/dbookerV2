@@ -8,6 +8,10 @@
     align-items: center;
 }
 
+button.fc-today-button.btn.btn-default.disabled{
+    cursor: default;
+}
+
 .modalDialog {
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
