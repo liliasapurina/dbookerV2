@@ -1,4 +1,4 @@
-var statusColorsMap = {"Home":"Crimson", "Office":"Green"};
+var statusColorsMap = {"Home": "Crimson", "Office": "Green"};
 var curSchedule = {};
 
 function fillSchedule(startDate, endDate) {
@@ -7,7 +7,7 @@ function fillSchedule(startDate, endDate) {
     $.get(
         "/schedule/between",
         {
-            start : startDate,
+            start: startDate,
             end: endDate
         },
         function (data) {
@@ -24,7 +24,7 @@ function addItem(item) {
         {
             events: [
                 {
-                    title: "Office Seat: " + seatName,
+                    title: "Office Seat:\n" + seatName,
                     start: date,
                     color: statusColorsMap["Office"],
                     textColor: 'white'
@@ -39,7 +39,7 @@ function showPopupForSeatsChoosing(start, end) {
     $.get(
         "/seat/available",
         {
-            start : start.format(),
+            start: start.format(),
             end: end.format()
         },
         function (data) {
@@ -50,11 +50,11 @@ function showPopupForSeatsChoosing(start, end) {
 
                 if (curSchedule[item.date] != undefined) {
                     content.append("<div class=\"seatsHeader\"><h4>Current seat</h4></div>");
-                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete Booking For: " + curSchedule[item.date] + "</div>");
+                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete Booking:<br/><b>" + curSchedule[item.date] + "</b></div>");
                     $("#delete" + item.date).click(function () {
                         deleteBooking(item.date);
                         $("div").remove("#seatsAt" + item.date);
-                        if(modalContent.html() === "") {
+                        if (modalContent.html() === "") {
                             closeSeatsChoosingPopup();
                         }
                     });
@@ -63,11 +63,11 @@ function showPopupForSeatsChoosing(start, end) {
 
                 content.append("<div class=\"seatsHeader\"><h4>Available Seats</h4></div>");
                 item.seats.forEach(function (seat) {
-                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat: " + seat.name + "</div>");
+                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat:<br/><b>" + seat.name + "</b></div>");
                     $("#" + seat.name + "At" + item.date).click(function () {
                         bookSeat(item.date, seat.id);
                         $("div").remove("#seatsAt" + item.date);
-                        if(modalContent.html() === "") {
+                        if (modalContent.html() === "") {
                             closeSeatsChoosingPopup();
                         }
                     })
@@ -107,7 +107,7 @@ function bookSeat(date, seatId) {
     ));
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     location.href = "#current";
     $('#calendar').fullCalendar({
         selectable: true,

@@ -45,7 +45,7 @@ public class SeatController {
     @GetMapping("available")
     public List<SchedulePeriod> getAvailableSeatsBetween(@RequestParam("start") String startDate, @RequestParam("end") String endDate) {
         List<SchedulePeriod> result = new ArrayList<>();
-        Set<Integer> allSeats = seatDao.findAll().stream().map(Seat::getId).collect(Collectors.toSet());
+        Set<Integer> allSeats = seatDao.findAll().stream().filter(Seat::isAvailable).map(Seat::getId).collect(Collectors.toSet());
         Date start = DateTime.convertStringToDate(startDate);
         Date end = DateTime.convertStringToDate(endDate);
         for (Date cur = start; !cur.after(end); cur = DateTime.plusDay(cur)) {
