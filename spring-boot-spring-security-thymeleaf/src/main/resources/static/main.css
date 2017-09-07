@@ -30,7 +30,7 @@
 }
 
 .modalDialog > div {
-    width: 50%;
+    width: 69%;
     position: relative;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
@@ -60,8 +60,12 @@
     box-shadow: 1px 1px 3px #000;
 }
 
-.availableSeat {
-    background: Green;
+#modalContent {
+    overflow: scroll;
+    max-height: 500px;
+}
+
+.seatChoosing {
     color: White;
     display: inline-block;
     font-size: larger;
@@ -74,13 +78,21 @@
     margin-right: 5px;
 }
 
-.availableSeat:hover {
+.seatChoosing:hover {
     cursor: pointer;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: grayscale(69%);
+    filter: grayscale(69%);
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     border-radius: 7px;
+}
+
+.availableSeat {
+    background: Green;
+}
+
+.deleteSeat {
+    background: Red;
 }
 
 .dateHeader {

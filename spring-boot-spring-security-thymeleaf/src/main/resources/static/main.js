@@ -1,7 +1,9 @@
-var statusColorsMap = {"Weekend":"Red", "Home":"dimGrey", "Illness":"Black", "Vacation":"Crimson", "Office":"Green"}
+var statusColorsMap = {"Home":"Crimson", "Office":"Green"};
+var curSchedule = {};
 
 function fillSchedule(startDate, endDate) {
     $('#calendar').fullCalendar('removeEventSources');
+    curSchedule = {};
     $.get(
         "/schedule/between",
         {
@@ -17,11 +19,12 @@ function fillSchedule(startDate, endDate) {
 function addItem(item) {
     var date = item.date;
     var seatName = item.seats[0].name;
+    curSchedule[date] = seatName;
     $('#calendar').fullCalendar('addEventSource',
         {
             events: [
                 {
-                    title: "Office seat: " + seatName,
+                    title: "Office Seat: " + seatName,
                     start: date,
                     color: statusColorsMap["Office"],
                     textColor: 'white'
@@ -45,7 +48,7 @@ function showPopupForSeatsChoosing(start, end) {
                 var content = $("#seatsAt" + item.date);
                 content.append("<div class=\"dateHeader\"><h2>" + item.date + "</h2></div>");
                 item.seats.forEach(function (seat) {
-                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"availableSeat\">Office seat: " + seat.name + "</div>");
+                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat: " + seat.name + "</div>");
                     $("#" + seat.name + "At" + item.date).click(function () {
                         bookSeat(item.date, seat.id);
                         $("div").remove("#seatsAt" + item.date);
@@ -54,10 +57,27 @@ function showPopupForSeatsChoosing(start, end) {
                         }
                     })
                 });
+                if (curSchedule[item.date] != undefined) {
+                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete</div>");
+                    $("#delete" + item.date).click(function () {
+                        deleteBooking(item.date);
+                        $("div").remove("#seatsAt" + item.date);
+                        if(modalContent.html() === "") {
+                            closeSeatsChoosingPopup();
+                        }
+                    });
+                }
             });
         }
     );
     location.href = "#chooseSeats";
+}
+
+function deleteBooking(date) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/schedule/unbook', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(date);
 }
 
 function closeSeatsChoosingPopup() {

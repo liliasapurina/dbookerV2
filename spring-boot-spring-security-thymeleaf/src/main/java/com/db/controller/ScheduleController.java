@@ -60,14 +60,11 @@ public class ScheduleController {
         return newScheduleItems;
     }
 
-    @DeleteMapping
-    public List<Schedule> deleteSchedule(@RequestBody BookSeat bookSeat) {
-        List<Schedule> allScheduleList = scheduleDao.findAll();
-        Schedule schedule = scheduleDao.findByDateEqualsAndSeatIdEquals(bookSeat.getDate(), bookSeat.getSeatId());
+    @DeleteMapping("unbook")
+    public void deleteSchedule(@RequestBody String date) {
+        Schedule schedule = scheduleDao.findByDateEqualsAndUserIdEquals(DateTime.convertStringToDate(date), 1); // TODO: Где хранить userId ?
         if (schedule != null) {
-            allScheduleList.remove(schedule);
             scheduleDao.delete(schedule);
         }
-        return allScheduleList;
     }
 }
