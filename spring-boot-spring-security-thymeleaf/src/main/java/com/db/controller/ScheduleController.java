@@ -57,12 +57,13 @@ public class ScheduleController {
     }
 
     @DeleteMapping
-    public void deleteSchedule(@RequestBody BookSeat bookSeat) {
+    public List<Schedule> deleteSchedule(@RequestBody BookSeat bookSeat) {
         List<Schedule> allScheduleList = scheduleDao.findAll();
-        for (Schedule schedule : allScheduleList) {
-            if(schedule.getDate().equals(bookSeat.getDate()) && schedule.getSeatId() == bookSeat.getSeatId()){
-                scheduleDao.delete(schedule.getId()); // TODO: как удалить?
-            }
+        Schedule schedule = scheduleDao.findByDateEqualsAndSeatIdEquals(bookSeat.getDate(), bookSeat.getSeatId());
+        if (schedule != null) {
+            allScheduleList.remove(schedule);
+            scheduleDao.delete(schedule);
         }
+        return allScheduleList;
     }
 }

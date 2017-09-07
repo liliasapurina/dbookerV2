@@ -13,6 +13,8 @@ import java.util.Set;
 public interface ScheduleDao extends CrudRepository<Schedule, Integer> {
     List<Schedule> findByDateBetween(Date startDate, Date endDate);
 
+    Schedule findByDateEqualsAndSeatIdEquals(Date date, int seatId);
+
     List<Schedule> findByDateGreaterThanEqualAndDateLessThanEqual(@Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
 
     List<Schedule> findAll();
