@@ -14,6 +14,7 @@
 <div th:replace="fragments/header :: header"/>
 
 <select id="cities" class="selectpicker btn-default btn-select-light"></select>
+<select id="rooms" class="selectpicker btn-default btn-select-light"></select>
 
 <div class="container">
     <h2>Seats available status</h2>
@@ -24,8 +25,8 @@
             <th>Available</th>
         </tr>
         </thead>
-        <tbody>
-        <tr class="success">
+        <tbody id="availableTable">
+<!--        <tr class="success">
             <td>301</td>
             <td>
                 <div class="checkbox">
@@ -40,7 +41,7 @@
                     <input type="checkbox" value=""/>
                 </div>
             </td>
-        </tr>
+        </tr>-->
         </tbody>
     </table>
 </div>
