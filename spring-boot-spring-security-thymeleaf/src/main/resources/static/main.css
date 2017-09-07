@@ -32,7 +32,7 @@
 .modalDialog > div {
     width: 69%;
     position: relative;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #fff;
@@ -62,7 +62,7 @@
 
 #modalContent {
     overflow: scroll;
-    max-height: 500px;
+    max-height: 600px;
 }
 
 .seatChoosing {
@@ -74,7 +74,6 @@
     border-radius: 4px;
     padding-left: 5px;
     padding-right: 5px;
-    vertical-align: 7px;
     margin-right: 5px;
 }
 
@@ -95,9 +94,10 @@
     background: Red;
 }
 
-.dateHeader {
+.seatsHeader {
     display: inline-block;
     margin-right: 50px;
+    margin-left: 69px;
 }
 
 #chooseSeatsHeader {

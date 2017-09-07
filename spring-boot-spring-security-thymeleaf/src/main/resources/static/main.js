@@ -46,7 +46,22 @@ function showPopupForSeatsChoosing(start, end) {
             data.forEach(function (item) {
                 modalContent.append("<div id=\"seatsAt" + item.date + "\"></div>");
                 var content = $("#seatsAt" + item.date);
-                content.append("<div class=\"dateHeader\"><h2>" + item.date + "</h2></div>");
+                content.append("<div><h3>" + item.date + "</h3></div>");
+
+                if (curSchedule[item.date] != undefined) {
+                    content.append("<div class=\"seatsHeader\"><h4>Current seat</h4></div>");
+                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete Booking for: " + curSchedule[item.date] + "</div>");
+                    $("#delete" + item.date).click(function () {
+                        deleteBooking(item.date);
+                        $("div").remove("#seatsAt" + item.date);
+                        if(modalContent.html() === "") {
+                            closeSeatsChoosingPopup();
+                        }
+                    });
+                    content.append("<div></div>");
+                }
+
+                content.append("<div class=\"seatsHeader\"><h4>Available Seats</h4></div>");
                 item.seats.forEach(function (seat) {
                     content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat: " + seat.name + "</div>");
                     $("#" + seat.name + "At" + item.date).click(function () {
@@ -57,16 +72,6 @@ function showPopupForSeatsChoosing(start, end) {
                         }
                     })
                 });
-                if (curSchedule[item.date] != undefined) {
-                    content.append("<div id=\"delete" + item.date + "\" class=\"seatChoosing deleteSeat\">Delete</div>");
-                    $("#delete" + item.date).click(function () {
-                        deleteBooking(item.date);
-                        $("div").remove("#seatsAt" + item.date);
-                        if(modalContent.html() === "") {
-                            closeSeatsChoosingPopup();
-                        }
-                    });
-                }
             });
         }
     );
