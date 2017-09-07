@@ -13,4 +13,5 @@ public class Seat {
     private int id;
     private String name;
     private int roomId;
+    private boolean available;
 }

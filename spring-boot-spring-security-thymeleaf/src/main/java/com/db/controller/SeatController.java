@@ -37,6 +37,11 @@ public class SeatController {
         return seatDao.save(seat);
     }
 
+    @PutMapping("update")
+    public Seat updateSeatStatus(@RequestBody Seat seat) {
+        return seatDao.save(seat);
+    }
+
     @GetMapping("available")
     public List<SchedulePeriod> getAvailableSeatsBetween(@RequestParam("start") String startDate, @RequestParam("end") String endDate) {
         List<SchedulePeriod> result = new ArrayList<>();
