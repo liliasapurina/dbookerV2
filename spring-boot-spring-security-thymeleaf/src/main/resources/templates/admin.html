@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>DBooker: Admin</title>
     <div th:replace="fragments/header :: header-css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src='../../lib/jquery.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../superAdmin.js"></script>
 </head>
 
 <body>
 
 <div th:replace="fragments/header :: header"/>
+
+<select id="cities" class="selectpicker btn-default btn-select-light"></select>
 
 <div class="container">
     <h2>Seats available status</h2>
