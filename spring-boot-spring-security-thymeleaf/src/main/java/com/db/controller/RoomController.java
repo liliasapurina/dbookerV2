@@ -1,6 +1,8 @@
 package com.db.controller;
 
+import com.db.dao.CityDao;
 import com.db.dao.RoomDao;
+import com.db.model.City;
 import com.db.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
     @Autowired
     private RoomDao roomDao;
+
+    @Autowired
+    private CityDao cityDao;
+
+    @GetMapping("cityId={cityId}")
+    public Iterable<Room> getRooms(@PathVariable int cityId) {
+        return roomDao.findAllByCityIdEquals(cityId);
+    }
 
     @GetMapping
     public Iterable<Room> getRooms() {
