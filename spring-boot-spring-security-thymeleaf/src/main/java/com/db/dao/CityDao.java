@@ -4,4 +4,5 @@ import com.db.model.City;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CityDao extends CrudRepository<City, Integer> {
+    City getByIdEquals(int id);
 }

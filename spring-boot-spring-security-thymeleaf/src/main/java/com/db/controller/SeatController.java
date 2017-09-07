@@ -26,6 +26,12 @@ public class SeatController {
         return seatDao.findAll();
     }
 
+
+    @GetMapping("roomId={roomId}")
+    public Iterable<Seat> getRooms(@PathVariable int roomId) {
+        return seatDao.findAllByRoomIdEquals(roomId);
+    }
+
     @PostMapping
     public Seat addSeat(@RequestBody Seat seat) {
         return seatDao.save(seat);

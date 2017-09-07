@@ -13,8 +13,5 @@ public class Seat {
     @GeneratedValue
     private int id;
     private String name;
-
-    @ManyToOne
-    @JsonIgnore
-    private Room room;
+    private int roomId;
 }

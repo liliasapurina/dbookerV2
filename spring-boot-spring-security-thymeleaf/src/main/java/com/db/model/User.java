@@ -19,8 +19,4 @@ public class User {
     private String name;
 
     private int status;
-
-   /* @ManyToOne
-    @JsonIgnore
-    private Schedule schedule;*/
 }
