@@ -15,6 +15,8 @@ public interface ScheduleDao extends CrudRepository<Schedule, Integer> {
 
     Schedule findByDateEqualsAndSeatIdEquals(Date date, int seatId);
 
+    Schedule findByDateEqualsAndUserIdEquals(Date date, int userId);
+
     List<Schedule> findByDateGreaterThanEqualAndDateLessThanEqual(@Temporal(TemporalType.DATE) Date startDate, @Temporal(TemporalType.DATE) Date endDate);
 
     List<Schedule> findAll();

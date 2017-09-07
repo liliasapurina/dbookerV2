@@ -46,11 +46,15 @@ public class ScheduleController {
     public List<Schedule> addScheduleItems(@RequestBody List<BookSeat> bookSeats) {
         List<Schedule> newScheduleItems = new ArrayList<>();
         for (BookSeat bookSeat : bookSeats) {
-            Schedule scheduleItem = new Schedule();
-            scheduleItem.setDate(bookSeat.getDate());
-            scheduleItem.setSeatId(bookSeat.getSeatId());
-            scheduleItem.setUserId(1); // TODO: Где хранить userId ?
-            newScheduleItems.add(scheduleItem);
+            Schedule currentSchedule = scheduleDao.findByDateEqualsAndUserIdEquals(bookSeat.getDate(), 1);
+            if (currentSchedule != null){
+                scheduleDao.delete(currentSchedule);
+            }
+            Schedule newScheduleItem = new Schedule();
+            newScheduleItem.setDate(bookSeat.getDate());
+            newScheduleItem.setSeatId(bookSeat.getSeatId());
+            newScheduleItem.setUserId(1); // TODO: Где хранить userId ?
+            newScheduleItems.add(newScheduleItem);
         }
         scheduleDao.save(newScheduleItems);
         return newScheduleItems;
