@@ -4,6 +4,7 @@ import com.db.dao.CityDao;
 import com.db.dao.RoomDao;
 import com.db.model.City;
 import com.db.model.Room;
+import com.db.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,23 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("room")
 public class RoomController {
     @Autowired
-    private RoomDao roomDao;
-
-    @Autowired
-    private CityDao cityDao;
+    private RoomService roomService;
 
     @GetMapping("cityId={cityId}")
     public Iterable<Room> getRooms(@PathVariable int cityId) {
-        return roomDao.findAllByCityIdEquals(cityId);
+        return roomService.getRooms(cityId);
     }
 
     @GetMapping
     public Iterable<Room> getRooms() {
-        return roomDao.findAll();
+        return roomService.getRooms();
     }
 
     @PostMapping
     public Room addRoom(@RequestBody Room room) {
-        return roomDao.save(room);
+        return roomService.addRoom(room);
     }
 }
