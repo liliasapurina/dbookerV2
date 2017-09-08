@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>DBooker</title>
+    <div th:replace="fragments/header :: header-css"/>
     <link rel='stylesheet' href='../../fullcalendar/fullcalendar.css'/>
     <link rel='stylesheet' href='../../main.css'/>
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css"/>
@@ -12,11 +13,13 @@
 </head>
 <body>
 
-<img src="../../img/logo.png" style="width: 100px; height: 100px; margin: 25px"/>
+<div th:replace="fragments/header :: header"/>
+
+<!--<img src="../../img/logo.png" style="width: 100px; height: 100px; margin: 25px"/>
 <h1 style="display: inline">DBooker</h1>
 <form id="logout" th:action="@{/logout}" method="post">
     <input class="btn btn-secondary btn-lg" type="submit" value="Sign Out" style="right:10px"/>
-</form>
+</form>-->
 
 <div id='calendar'></div>
 
