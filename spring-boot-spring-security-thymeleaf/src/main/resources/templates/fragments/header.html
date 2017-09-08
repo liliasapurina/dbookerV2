@@ -2,10 +2,11 @@
 <head>
     <div th:fragment="header-css">
         <link rel="stylesheet" th:href="@{/css/bootstrap.css}"
-              href="../../css/bootstrap.css" />
+              href="../../css/bootstrap.css"/>
 
         <script src='../../lib/jquery.min.js'></script>
         <script src="../../header.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </div>
 </head>
 <body>
@@ -19,12 +20,46 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
+                <li class="active"><a data-toggle="modal" data-target="#myModal">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
+
+
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">DBooker v0.1</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Flexible workplaces booking</p>
+                        <div>
+                        <dt class="text-center">USER</dt>
+                        <p class="text-center"> - Book workplace from calendar (single or group) - </p>
+                        <p class="text-center"> - Change current booking - </p>
+                        <p class="text-center"> - Delete booking - </p>
+                        <p class="text-center"> - Review booking history - </p>
+                        </div>
+                        <div>
+                        <dt class="text-center">ADMIN</dt>
+                        <p class="text-center"> - Change seat available status - </p>
+                        <p class="text-center"> - Add working place - </p>
+                        </div>
+                        <p class="bg-warning">Copyright © 2017, Doutsche Bank, All Rights Reserved</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
 
 </body>
