@@ -127,7 +127,6 @@ $(document).ready(function () {
             }
         ));
         $("#seatNameInput").val("");
-        $("#addSeatModal").modal('toggle');
         clearTable();
         showListOfSeats(selectedRoom);
     });
