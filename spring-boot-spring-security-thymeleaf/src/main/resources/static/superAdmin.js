@@ -80,6 +80,16 @@ function showListOfSeats(roomName) {
     );
 }
 
+function checkAddNewSeatAvailability() {
+    var selectedCity = $("#cities").find("option:selected").val();
+    var selectedRoom = $("#rooms").find("option:selected").val();
+    if (cities[selectedCity] && rooms[selectedRoom]) {
+        $("#addNewSeat").show();
+    } else {
+        $("#addNewSeat").hide();
+    }
+}
+
 $(document).ready(function () {
     showListOfCities();
 
@@ -90,6 +100,7 @@ $(document).ready(function () {
         } else {
             clearTable();
         }
+        checkAddNewSeatAvailability()
     });
 
     $("#rooms").on('change', function () {
@@ -99,5 +110,27 @@ $(document).ready(function () {
         } else {
             clearTable();
         }
+        checkAddNewSeatAvailability();
     });
+
+    $("#btnSaveNewSeat").click(function () {
+        var selectedRoom = $("#rooms").find("option:selected").val();
+        var roomId = rooms[selectedRoom];
+        var seatName = $("#seatNameInput").val();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/seat', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(
+            {
+                name: seatName,
+                roomId: roomId
+            }
+        ));
+        $("#seatNameInput").val("");
+        $("#addSeatModal").modal('toggle');
+        clearTable();
+        showListOfSeats(selectedRoom);
+    });
+
+    checkAddNewSeatAvailability();
 });

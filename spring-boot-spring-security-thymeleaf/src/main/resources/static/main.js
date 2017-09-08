@@ -1,5 +1,6 @@
 var statusColorsMap = {"Home": "Crimson", "Office": "Green"};
 var curSchedule = {};
+var rooms = {};
 
 function fillSchedule(startDate, endDate) {
     $('#calendar').fullCalendar('removeEventSources');
@@ -18,13 +19,14 @@ function fillSchedule(startDate, endDate) {
 
 function addItem(item) {
     var date = item.date;
+    var roomId = item.seats[0].roomId;
     var seatName = item.seats[0].name;
     curSchedule[date] = seatName;
     $('#calendar').fullCalendar('addEventSource',
         {
             events: [
                 {
-                    title: "Office Seat:\n" + seatName,
+                    title: "Office Seat:\n" + rooms[roomId] + "/" + seatName,
                     start: date,
                     color: statusColorsMap["Office"],
                     textColor: 'white'
@@ -63,7 +65,7 @@ function showPopupForSeatsChoosing(start, end) {
 
                 content.append("<div class=\"seatsHeader\"><h4>Available Seats</h4></div>");
                 item.seats.forEach(function (seat) {
-                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat:<br/><b>" + seat.name + "</b></div>");
+                    content.append("<div id=\"" + seat.name + "At" + item.date + "\" class=\"seatChoosing availableSeat\">Office Seat:<br/>" + rooms[seat.roomId] + "/<b>" + seat.name + "</b></div>");
                     $("#" + seat.name + "At" + item.date).click(function () {
                         bookSeat(item.date, seat.id);
                         $("div").remove("#seatsAt" + item.date);
@@ -109,6 +111,14 @@ function bookSeat(date, seatId) {
 
 $(document).ready(function () {
     location.href = "#current";
+    $.get(
+        "/room",
+        function (data) {
+            data.forEach(function (room) {
+                rooms[room.id] = room.name;
+            })
+        }
+    );
     $('#calendar').fullCalendar({
         selectable: true,
         selectConstraint: {
@@ -116,7 +126,7 @@ $(document).ready(function () {
             end: $.fullCalendar.moment().add(69, 'years')
         },
         firstDay: 1,
-        aspectRatio: 2,
+        aspectRatio: 2.25,
         themeSystem: 'bootstrap3',
         header: {
             left: '',
