@@ -2,6 +2,7 @@ package com.db.controller;
 
 import com.db.dao.TeamDao;
 import com.db.model.Team;
+import com.db.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("team")
 public class TeamController {
     @Autowired
-    private TeamDao teamDao;
+    private TeamService teamService;
 
     @GetMapping
     public Iterable<Team> getTeams() {
-        return teamDao.findAll();
+        return teamService.getTeams();
     }
 
     @PostMapping
     public Team addTeam(@RequestBody Team team) {
-        return teamDao.save(team);
+        return teamService.addTeam(team);
     }
 }

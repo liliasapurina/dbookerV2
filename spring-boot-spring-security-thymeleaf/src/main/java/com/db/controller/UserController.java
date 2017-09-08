@@ -2,6 +2,7 @@ package com.db.controller;
 
 import com.db.dao.UserDao;
 import com.db.model.User;
+import com.db.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("user")
 public class UserController {
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @GetMapping
     public Iterable<User> getTeam() {
-        return userDao.findAll();
+        return userService.getTeam();
     }
 
     @PostMapping
     public User addUser(@RequestBody User user) {
-        return userDao.save(user);
+        return userService.addUser(user);
     }
 }
