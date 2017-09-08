@@ -18,6 +18,7 @@
     <h1>Seats availability</h1>
     <select id="cities" class="form-control selectpicker" title="Choose one of the following..."></select>
     <select id="rooms" class="form-control selectpicker" title="Choose one of the following..."></select>
+    <a id="addNewSeat" title="Add Seat" data-toggle="modal" data-target="#addSeatModal"><span class="glyphicon glyphicon-plus"></span></a>
     <table class="table">
         <thead>
         <tr>
@@ -26,24 +27,28 @@
         </tr>
         </thead>
         <tbody id="availableTable">
-<!--        <tr class="success">
-            <td>301</td>
-            <td>
-                <div class="checkbox">
-                    <input type="checkbox" value=""/>
-                </div>
-            </td>
-        </tr>
-        <tr class="danger">
-            <td>302</td>
-            <td>
-                <div class="checkbox">
-                    <input type="checkbox" value=""/>
-                </div>
-            </td>
-        </tr>-->
         </tbody>
     </table>
+</div>
+
+<div class="modal fade" id="addSeatModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Add Seat</h2>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input id="seatNameInput" type="text" class="form-control" name="seatNameInput" placeholder="Seat Name"/>
+                </div>
+                <button id="btnSaveNewSeat" type="button" class="btn btn-primary active" style="margin: 20px">Save</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 </body>
